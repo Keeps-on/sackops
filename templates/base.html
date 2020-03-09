@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <!--https://www.layuicdn.com/#layui-v2.5.6-->
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css">
+    <!--https://code.highcharts.com.cn/index.html-->
+    <!--<link rel="stylesheet" href="http://cdn.highcharts.com.cn/highcharts/css/highcharts.css">-->
+    <link rel="stylesheet" href="http://cdn.highcharts.com.cn/highcharts/css/themes/dark-unica.css">
+    <!--<link rel="stylesheet" href="http://cdn.highcharts.com.cn/highcharts/css/themes/grid-light.css">-->
+    <link rel="stylesheet" href="http://cdn.highcharts.com.cn/highcharts/css/themes/sand-signika.css">
+    <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>
+    <!--https://code.highcharts.com.cn/index.html-->
+    <script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+
+
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function () {
+            var element = layui.element;
+
+            //…
+        });
+    </script>
+
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+
+    {% include "header.html" %}
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
+
+    {% include "footer.html" %}
+</div>
+
+</body>
+</html>
+{% block js %}
+
+{% endblock js %}
+
+
+{#% {% block title %}{% endblock %} %#}
+{#% {% block content %}{% endblock %} %#}
