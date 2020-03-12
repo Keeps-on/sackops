@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="http://cdn.highcharts.com.cn/highcharts/css/themes/dark-unica.css">
     <!--<link rel="stylesheet" href="http://cdn.highcharts.com.cn/highcharts/css/themes/grid-light.css">-->
     <link rel="stylesheet" href="http://cdn.highcharts.com.cn/highcharts/css/themes/sand-signika.css">
+
+    <!--引入全局背景颜色-->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>
     <!--https://code.highcharts.com.cn/index.html-->
     <script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
@@ -24,6 +27,13 @@
             //…
         });
     </script>
+
+    {% block css/js %}
+
+    {% endblock css/js %}
+
+
+
 
 </head>
 <body class="layui-layout-body">

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+首页
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md8">
+            {#% cpu图表渲染 %#}
+            <div id="cpu-chart" style="min-width:400px;height:400px"></div>
+        </div>
+        <div class="layui-col-md4">
+            {#% 内存利用率图表渲染 %#}
+            <div id="memory-panel" style="min-width:400px;height:400px"></div>
+        </div>
+    </div>
+
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md6">
+            {#% 当前告警表格渲染 %#}
+            <table class="layui-hide" id="alert" lay-filter="alert-event"></table>
+        </div>
+        <div class="layui-col-md6">
+            {#% 历史告警表格渲染 %#}
+            <table class="layui-hide" id="alert-his" lay-filter="alert-his-event"></table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock js %}
