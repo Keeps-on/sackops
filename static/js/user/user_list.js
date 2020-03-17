@@ -4,8 +4,13 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
         , form = layui.form
         , table = layui.table
 
+    //
+    var createUrl = $("input[name='url_user_create']").val();
+    console.log(createUrl)
 
-    // 用户渲染表格
+    /**
+     * 用户表格渲染
+     */
     table.render({
         elem: '#user_table'
         , height: 420
@@ -18,7 +23,7 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
         , totalRow: true //开启合计行
         , cols: [[ //表头
             {type: 'checkbox', fixed: 'left'}
-            , {field: 'id', title: 'ID',  sort: true, fixed: 'left', align: 'center',totalRowText: '合计：'}
+            , {field: 'id', title: 'ID', sort: true, fixed: 'left', align: 'center', totalRowText: '合计：'}
             , {field: 'username', title: '用户名', align: 'center'}
             , {field: 'password', title: '密码', align: 'center'}
             , {field: 'phone', title: '手机号码', align: 'center'}
@@ -28,7 +33,9 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
     });
 
 
-    //监听头工具栏事件
+    /**
+     * 表格监听事件
+     */
     table.on('toolbar(user_action)', function (obj) {
         var checkStatus = table.checkStatus(obj.config.id)
             , data = checkStatus.data; //获取选中的数据
@@ -40,6 +47,23 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
                     // , area: ['500px', '300px']
                     , area: '600px'
                     , content: $('#user_popup').html()
+                    , yes: function (index, layero) {
+                        console.log('回调函数')
+                        // 获取用户名
+                        var username = $('#username').val();
+                        // 获取密码
+                        var password = $('#password').val();
+                        //TODO 校验
+                        $.get(createUrl, {username: username, password: password},
+                            function (result) {
+                                console.log(result)
+                            })
+
+
+                        console.log(username, password)
+
+                        layer.close(index); //如果设定了yes回调，需进行手工关闭
+                    }
                 });
                 break;
             case 'update':

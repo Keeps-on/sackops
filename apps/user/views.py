@@ -2,7 +2,6 @@ from django.shortcuts import render, render_to_response
 
 from django.http import JsonResponse, HttpResponse
 
-
 from user.models import UserProfile
 
 
@@ -31,7 +30,7 @@ def user_create(request):
     username = request.GET.get('username')
     password = request.GET.get('password')
     # 存入数据
-    UserProfile.objects.create(username=username,password=password)
+    UserProfile.objects.create(username=username, password=password)
     return JsonResponse(result)
 
 
