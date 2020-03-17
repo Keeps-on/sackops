@@ -2,7 +2,9 @@ from django.db import models
 
 
 # Create your models here.
-
+###################################
+#          用户表                  #
+###################################
 
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='主键自增')
@@ -16,6 +18,9 @@ class UserProfile(models.Model):
         db_table = "UserProfile"
 
 
+###################################
+#          角色表                  #
+###################################
 class Role(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='主键自增')
     name = models.CharField(max_length=12, verbose_name="角色名称")
@@ -27,6 +32,9 @@ class Role(models.Model):
         db_table = "Role"
 
 
+###################################
+#          权限表                  #
+###################################
 class Permission(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='主键自增')
     name = models.CharField(max_length=12, verbose_name="权限名称")
@@ -36,3 +44,12 @@ class Permission(models.Model):
 
     class Meta:
         db_table = "Permission"
+
+
+###################################
+#         用户角色关联表            #
+###################################
+class UserRole(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name='主键自增')
+    uid = models.IntegerField(verbose_name='用户id')
+    rid = models.IntegerField(verbose_name='角色id')
