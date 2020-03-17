@@ -7,7 +7,9 @@ from user.models import UserProfile
 
 
 # Create your views here.
-
+###################################
+#          用户相关                #
+###################################
 
 def user_list(request):
     """
@@ -31,3 +33,16 @@ def user_create(request):
     # 存入数据
     UserProfile.objects.create(username=username,password=password)
     return JsonResponse(result)
+
+
+###################################
+#          角色相关                #
+###################################
+
+def role_list(request):
+    """
+    角色列表
+    :param request:
+    :return:
+    """
+    return render_to_response(template_name='user/user_list.html')

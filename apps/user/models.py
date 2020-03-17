@@ -53,3 +53,9 @@ class UserRole(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='主键自增')
     uid = models.IntegerField(verbose_name='用户id')
     rid = models.IntegerField(verbose_name='角色id')
+
+    def __str__(self):
+        return "<{}>".format(self.uid)
+
+    class Meta:
+        db_table = "User_Role"
