@@ -18,16 +18,12 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
         , totalRow: true //开启合计行
         , cols: [[ //表头
             {type: 'checkbox', fixed: 'left'}
-            , {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', totalRowText: '合计：'}
-            , {field: 'username', title: '用户名', width: 80}
-            , {field: 'experience', title: '积分', width: 90, sort: true, totalRow: true}
-            , {field: 'sex', title: '性别', width: 80, sort: true}
-            , {field: 'score', title: '评分', width: 80, sort: true, totalRow: true}
-            , {field: 'city', title: '城市', width: 150}
-            , {field: 'sign', title: '签名', width: 200}
-            , {field: 'classify', title: '职业', width: 100}
-            , {field: 'wealth', title: '财富', width: 135, sort: true, totalRow: true}
-            , {fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo'}
+            , {field: 'id', title: 'ID',  sort: true, fixed: 'left', align: 'center',totalRowText: '合计：'}
+            , {field: 'username', title: '用户名', align: 'center'}
+            , {field: 'password', title: '密码', align: 'center'}
+            , {field: 'phone', title: '手机号码', align: 'center'}
+            , {field: 'email', title: '邮箱', align: 'center'}
+            , {fixed: 'right', title: '操作', width: 165, align: 'center', toolbar: '#barDemo'}
         ]]
     });
 
@@ -44,10 +40,7 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
                     // , area: ['500px', '300px']
                     , area: '600px'
                     , content: $('#user_popup').html()
-                    ,
                 });
-
-
                 break;
             case 'update':
                 if (data.length === 0) {
