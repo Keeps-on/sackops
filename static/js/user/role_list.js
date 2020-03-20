@@ -3,6 +3,7 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
         , layer = layui.layer
         , form = layui.form
         , table = layui.table
+        , transfer = layui.transfer;
 
     // 创建角色
     var createUrl = $("input[name='url_role_create']").val();
@@ -10,6 +11,7 @@ layui.use(['layer', 'form', 'table', 'jquery'], function () {
     var roleUrl = $("input[name='url_role_list']").val();
     // 角色数据表格
     var dataUrl = $("input[name='url_role_data']").val();
+    
 
 
     /**

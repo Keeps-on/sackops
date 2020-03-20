@@ -63,6 +63,23 @@ def user_create(request):
     return JsonResponse(result)
 
 
+def user_update(request):
+    """
+    修改用户
+    :param request:
+    :return:
+    """
+    result = {"code": 0, "msg": ""}
+    # 修改用户信息
+    user_id = request.GET.get('user_id')
+    username = request.GET.get('username')
+    password = request.GET.get('password')
+    print(user_id,username,password)
+    # 修改用户
+    UserProfile.objects.filter(id=user_id).update(username=username, password=password)
+    return JsonResponse(result)
+
+
 ###################################
 #          角色相关                #
 ###################################

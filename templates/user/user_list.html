@@ -43,6 +43,8 @@
 <input type="hidden" name="url_user_create" value="{% url 'user:user_create' %}">
 <input type="hidden" name="url_user_list" value="{% url 'user:user_list' %}">
 <input type="hidden" name="url_user_data" value="{% url 'user:user_data' %}">
+<input type="hidden" name="url_user_update" value="{% url 'user:user_update' %}">
+<input type="hidden" name="url_role_data" value="{% url 'user:role_data' %}">
 
 
 {% endblock %}
@@ -62,7 +64,7 @@
 
 {#% 操作表格 %#}
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">角色管理</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -86,6 +88,14 @@
                 </div>
             </div>
         </div>
+    </div>
+</script>
+
+{#% 弹窗配置 %#}
+
+<script type="text/html" id="transfer_popup">
+    <div style="margin-left: 70px;margin-top: 50px">
+        <div id="transfer_role" class=""></div>
     </div>
 </script>
 
