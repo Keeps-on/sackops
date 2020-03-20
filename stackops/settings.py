@@ -150,4 +150,13 @@ EMAIL_HOST_USER = 'lippjobemail@163.com'    #发送邮件的邮箱地址
 EMAIL_HOST_PASSWORD = 'lipanpan0613'         #发送邮件的邮箱密码(这里使用的是授权码)
 EMAIL_FROM = 'Ops<lippjobemail@163.com>'
 
+
+# https://jingyan.baidu.com/article/647f0115b78f8d7f2148a8e8.html
+# 网易163免费邮箱相关服务信息
+# 服务器名称      服务器地址       SSL协议端口号    非SSL协议端口号
+#  IMAP        imap.163.com        993             143
+#  SMTP        smtp.163.com       465/994          25
+#  POP3
+
+
 ########### EmailConfig ################
