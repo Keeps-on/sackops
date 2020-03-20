@@ -18,14 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 
 from stackops import views as home_views
+from user import views as user_views
 from user import urls
+
+app_name = 'ops'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 首页
     path('', home_views.index),
-
     # 用户
-    path('user/', include('user.urls'))
+    path('user/', include('user.urls')),
 
 ]

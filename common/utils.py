@@ -123,6 +123,7 @@ def send_mail_attach_async(*args, **kwargs):
         reply_to=None,
     )
     message.content_subtype = "html"
+    message.encoding = 'utf-8'
     message.attach_file('/home/code/scripts/scripts-py/_re.py')
     message.send()
 
@@ -172,5 +173,6 @@ def send_mail_html_async(*args, **kwargs):
     message.attach_alternative(html_content, "text/html")
     # 添加附件
     message.content_subtype = "html"
+    message.encoding = 'utf-8'
     message.attach_file('/home/code/scripts/scripts-py/_re.py')
     message.send()
