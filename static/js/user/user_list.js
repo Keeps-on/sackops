@@ -69,6 +69,9 @@ layui.use(['layer', 'form', 'table', 'jquery', 'transfer'], function () {
                         $.get(createUrl, {username: username, password: password},
                             function (result) {
                                 console.log(result)
+                                
+
+
                             })
                         console.log(username, password)
                         layer.close(index); //如果设定了yes回调，需进行手工关闭

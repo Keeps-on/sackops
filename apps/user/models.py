@@ -5,7 +5,7 @@ from django.db import models
 ###################################
 #          用户表                  #
 ###################################
-
+# TODO https://www.jianshu.com/p/def82ae48cef
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='主键自增')
     username = models.CharField(max_length=12, verbose_name='用户名')

@@ -1,6 +1,8 @@
 from django.shortcuts import render, render_to_response
 
 from django.http import JsonResponse, HttpResponse
+from common import keys
+from django.core.cache import cache
 
 from user.models import UserProfile, Role
 from common.utils import send_mail_async, send_mail_attach_async, send_mail_html_async
@@ -41,13 +43,25 @@ def user_data(request):
         "code": 0,
         "msg": "",
     }
-    data = UserProfile.objects.values()[page_start:page_end]
-    count = data.count()
+    # 增加缓存层
+    key = keys.USER_KEY % 'profile_data'
+    profile_data = cache.get(key)
+    print(profile_data)
+    if profile_data is None:
+        print("数据库获取")
+        profile_data = UserProfile.objects.values()
+        cache.set(key, profile_data)  # 将数据添加到缓存
+
+    data = profile_data[page_start:page_end]
+    print(data)
+    count = profile_data.count()
     result['data'] = list(data)
     result['count'] = count
     return JsonResponse(result)
 
-
+# TODO 对于新增用户需要更新缓存
+# https://www.jianshu.com/p/e3c640e2482c
+# https://www.cnblogs.com/robinunix/articles/10614369.html
 def user_create(request):
     """
     添加用户
