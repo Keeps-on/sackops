@@ -71,7 +71,6 @@ layui.use(['layer', 'form', 'table', 'jquery', 'transfer'], function () {
                                 console.log(result)
                             })
                         console.log(username, password)
-
                         layer.close(index); //如果设定了yes回调，需进行手工关闭
                     }
                 });
@@ -104,50 +103,108 @@ layui.use(['layer', 'form', 'table', 'jquery', 'transfer'], function () {
             , layEvent = obj.event; //获得 lay-event 对应的值
         if (layEvent === 'detail') {
 
+            // 用户id
+            var uid = data.id;
+            console.log(uid)
 
-            transfer.render({
-                id: 'transfer_role' //定义索引
-                , elem: '#transfer_role'
-                , title: ['系统角色', '分配角色']
-                , showSearch: true
-                , parseData: function (data) {
-                    return {
-                        "value": data.id //数据值
-                        , "title": data.name //数据标题
-                        // , "disabled": res.disabled  //是否禁用
-                        // , "checked": res.checked //是否选中
-                    }
+
+            layer.open({
+                title: '角色管理'
+
+                // , area: ['500px', '300px']
+                // , area: '600px'
+                , offset: '100px'
+                , btnAlign: 'c' //按钮居中
+                , content: $('#transfer_popup').html()
+                , success: function (layero, index) {
+                    $.get(roleUrl, {}, function (result) {
+                        console.log('------------')
+                        console.log(result)
+                        console.log('------------')
+                        // 角色列表
+                        var role_list = result.data;
+                        var role_value = []
+
+                        transfer.render({
+                            id: 'transfer_role' //定义索引
+                            , elem: '#transfer_role'
+                            , title: ['系统角色', '分配角色']
+                            , showSearch: true
+                            , parseData: function (data) {
+                                return {
+                                    "value": data.id //数据值
+                                    , "title": data.name //数据标题
+                                    // , "disabled": res.disabled  //是否禁用
+                                    // , "checked": res.checked //是否选中
+                                }
+                            }
+                            , data: role_list
+                            , value: role_value
+                            , onchange: function (obj, index) {
+                                // 获取角色列表
+                                var choice_role = []
+                                for (var r in obj) {
+                                    var rid = obj[r].value;
+                                    choice_role.push(rid); // 将选中的角色添加到数组中
+                                }
+                                console.log(choice_role)
+                                switch (index) {
+                                    case 0:  // 添加数据
+                                        // do thing
+                                        break;
+                                    case 1:  // 移除数据
+                                        // do sthing
+                                        break;
+                                    default:
+                                    //
+                                }
+
+
+                                if (index == 0) {
+                                    $.post(ConfigUrl, {index: 'add', user_id: user_id}, function (res) {
+                                        console.log(res)
+                                    });
+                                } else {
+                                    $.post(ConfigUrl, {index: 'remove', user_id: user_id}, function (res) {
+                                        console.log(res)
+                                    });
+                                }
+
+
+
+
+                                // console.log(obj.length)
+                                // console.log('右侧数据')
+                                //
+                                // for (i = 0; obj.length; i++) {
+                                //     console.log(obj[i])
+                                // }
+
+
+                            }
+                        })
+                    })
                 }
-                , data: []
-                , value: []
-                , onchange: function (obj, index) {
-
-                    // // console.log(index)  // 返回0或者1
-                    // // console.log(obj) // 返回数据
-                    // var user_id = []    // 发送数据的
-                    // for (var item in obj) {
-                    //     var uid = obj[item].value;
-                    //     user_id.push(uid)
-                    // }
-                    //
-                    // if (index == 0) {
-                    //     $.post(ConfigUrl, {index: 'add', user_id: user_id}, function (res) {
-                    //         console.log(res)
-                    //     });
-                    // } else {
-                    //     $.post(ConfigUrl, {index: 'remove', user_id: user_id}, function (res) {
-                    //         console.log(res)
-                    //     });
-                    // }
-
-                    console.log(user_id)
+                , yes: function (index, layero) {
 
 
+                    console.log('回调函数')
+                    // 获取用户名
+                    var username = $('#username').val();
+                    // 获取密码
+                    var password = $('#password').val();
+                    //TODO 校验
+                    $.get(createUrl, {username: username, password: password},
+                        function (result) {
+                            console.log(result)
+                        })
+                    console.log(username, password)
+                    layer.close(index); //如果设定了yes回调，需进行手工关闭
                 }
-            })
+            });
 
 
-            layer.msg('查看操作');
+            // layer.msg('查看操作');
         } else if (layEvent === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 obj.del(); //删除对应行（tr）的DOM结构

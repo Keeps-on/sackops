@@ -160,3 +160,16 @@ EMAIL_FROM = 'Ops<lippjobemail@163.com>'
 
 
 ########### EmailConfig ################
+
+
+# Django-Redis 配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/9",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PICKLE_VERSION": -1,
+        }
+    }
+}

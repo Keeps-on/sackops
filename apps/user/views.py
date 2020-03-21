@@ -74,10 +74,28 @@ def user_update(request):
     user_id = request.GET.get('user_id')
     username = request.GET.get('username')
     password = request.GET.get('password')
-    print(user_id,username,password)
+    print(user_id, username, password)
     # 修改用户
     UserProfile.objects.filter(id=user_id).update(username=username, password=password)
     return JsonResponse(result)
+
+
+def user_add_role(request):
+    """
+    用户添加角色
+    :param request:
+    :return:
+    """
+    
+
+
+def user_move_role(request):
+    """
+    用户移除角色
+    :param request:
+    :return:
+    """
+
 
 
 ###################################
