@@ -137,7 +137,7 @@ def user_get_roles(request):
     # 获取系统角色
     role_list = Role.objects.values()
     # 返回系统中所有的角色
-    
+
 
 ###################################
 #          角色相关                #
