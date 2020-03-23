@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from common import keys
 from django.core.cache import cache
 
-from user.models import UserProfile, Role
+from user.models import UserProfile, Role, UserRole
 from common.utils import send_mail_async, send_mail_attach_async, send_mail_html_async
 
 
@@ -51,13 +51,13 @@ def user_data(request):
         print("数据库获取")
         profile_data = UserProfile.objects.values()
         cache.set(key, profile_data)  # 将数据添加到缓存
-
     data = profile_data[page_start:page_end]
     print(data)
     count = profile_data.count()
     result['data'] = list(data)
     result['count'] = count
     return JsonResponse(result)
+
 
 # TODO 对于新增用户需要更新缓存
 # https://www.jianshu.com/p/e3c640e2482c
@@ -100,10 +100,26 @@ def user_add_role(request):
     :param request:
     :return:
     """
-    
+    result = {"code": 0, "msg": ""}
+    # 获取用户id
+    uid = request.GET.get('uid')
+    # 获取角色列表
+    choice_role = request.GET.getlist('choice_role[]')
+    print(uid, choice_role)
+    # 存入数据库
+    user_exists = UserRole.objects.filter(uid=uid).exists()  # 存在返回True不存在返回False
+    if user_exists:
+        # 批量存入数据
+        user_role_obj = [UserRole(uid=uid, rid=int(rid)) for rid in choice_role]
+        # 创建数据
+        UserRole.objects.bulk_create(user_role_obj)
+    else:
+        user_role_obj = [UserRole(uid=uid, rid=int(rid)) for rid in choice_role]
+        UserRole.objects.bulk_create(user_role_obj)
+    return JsonResponse(result)
 
 
-def user_move_role(request):
+def user_remove_role(request):
     """
     用户移除角色
     :param request:
@@ -111,6 +127,17 @@ def user_move_role(request):
     """
 
 
+def user_get_roles(request):
+    """
+    获取当前用户的角色
+    :param request:
+    :return:
+    """
+    uid = request.GET.get('uid')
+    # 获取系统角色
+    role_list = Role.objects.values()
+    # 返回系统中所有的角色
+    
 
 ###################################
 #          角色相关                #

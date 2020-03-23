@@ -13,4 +13,7 @@ urlpatterns = [
     path('role/', views.role_list, name='role_list'),
     path('role/create/', views.role_create, name='role_create'),
     path('role/data/', views.role_data, name='role_data'),
+    # 用户绑定角色
+    path('role/add', views.user_add_role, name='user_add_role'),
+    path('role/remove', views.user_remove_role, name='user_remove_role')
 ]

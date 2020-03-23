@@ -17,7 +17,9 @@ layui.use(['layer', 'form', 'table', 'jquery', 'transfer'], function () {
 
     // 角色列表
     var roleUrl = $("input[name='url_role_data']").val();
-
+    // 用户绑定角色
+    var addroleUrl = $("input[name='url_user_add_role']").val();
+    var moveroleUrl = $("input[name='url_user_remove_role']").val();
 
     /**
      * 用户表格渲染
@@ -69,7 +71,6 @@ layui.use(['layer', 'form', 'table', 'jquery', 'transfer'], function () {
                         $.get(createUrl, {username: username, password: password},
                             function (result) {
                                 console.log(result)
-                                
 
 
                             })
@@ -153,27 +154,30 @@ layui.use(['layer', 'form', 'table', 'jquery', 'transfer'], function () {
                                 console.log(choice_role)
                                 switch (index) {
                                     case 0:  // 添加数据
-                                        // do thing
+                                        $.get(addroleUrl, {uid: uid, choice_role: choice_role}, function (result) {
+                                            console.log(result)
+                                        })
+
+
                                         break;
                                     case 1:  // 移除数据
                                         // do sthing
                                         break;
+
                                     default:
                                     //
                                 }
 
-
-                                if (index == 0) {
-                                    $.post(ConfigUrl, {index: 'add', user_id: user_id}, function (res) {
-                                        console.log(res)
-                                    });
-                                } else {
-                                    $.post(ConfigUrl, {index: 'remove', user_id: user_id}, function (res) {
-                                        console.log(res)
-                                    });
-                                }
-
-
+                                //
+                                // if (index == 0) {
+                                //     $.post(ConfigUrl, {index: 'add', user_id: user_id}, function (res) {
+                                //         console.log(res)
+                                //     });
+                                // } else {
+                                //     $.post(ConfigUrl, {index: 'remove', user_id: user_id}, function (res) {
+                                //         console.log(res)
+                                //     });
+                                // }
 
 
                                 // console.log(obj.length)
@@ -196,12 +200,12 @@ layui.use(['layer', 'form', 'table', 'jquery', 'transfer'], function () {
                     var username = $('#username').val();
                     // 获取密码
                     var password = $('#password').val();
-                    //TODO 校验
-                    $.get(createUrl, {username: username, password: password},
-                        function (result) {
-                            console.log(result)
-                        })
-                    console.log(username, password)
+                    // //TODO 校验
+                    // $.get(createUrl, {username: username, password: password},
+                    //     function (result) {
+                    //         console.log(result)
+                    //     })
+                    // console.log(username, password)
                     layer.close(index); //如果设定了yes回调，需进行手工关闭
                 }
             });
